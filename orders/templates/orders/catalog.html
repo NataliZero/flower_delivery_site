@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог товаров</title>
+</head>
+<body>
+    <h1>Каталог товаров</h1>
+    <ul>
+        {% for product in products %}
+            <li>
+                <strong>{{ product.name }}</strong> — {{ product.price }} руб.<br>
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200"><br>
+                {% endif %}
+                <a href="{% url 'order_create' %}?product_id={{ product.id }}">
+                    <button>Заказать</button>
+                </a>
+            </li>
+        {% empty %}
+            <li>Товары не найдены.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
